@@ -1,3 +1,5 @@
+"use client";
+
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { OWNER_SIGNATURE, LOGO_BRITISH_SAFETY, LOGO_IFSM, LOGO_MAECS_PAT } from '@/constants/assets';
@@ -10,12 +12,14 @@ interface jsPDFWithPlugin extends jsPDF {
   };
 }
 
+// @ts-ignore
 export const generatePDF = (siteDetails: any, doors: Door[]) => {
   const doc = new jsPDF() as jsPDFWithPlugin;
   const timestamp = new Date().toLocaleDateString('en-GB');
   const remedialRequired = doors.some(door => Object.values(door.responses).includes('Fail'));
 
   const addFooter = (pdf: jsPDF) => {
+    // @ts-ignore
     const pageCount = (pdf as any).internal.getNumberOfPages();
     for (let i = 1; i <= pageCount; i++) {
       pdf.setPage(i);
@@ -102,7 +106,7 @@ export const generatePDF = (siteDetails: any, doors: Door[]) => {
       body: FIRE_DOOR_QUESTIONS.map((q, i) => [`${i + 1}. ${q.text}`, door.responses[q.id] || 'N/A']),
       theme: 'grid',
       styles: { 
-        fontSize: 13, // INCREASED TO YOUR REQUESTED SIZE
+        fontSize: 13, 
         cellPadding: 4,
         overflow: 'linebreak'
       },
@@ -111,7 +115,6 @@ export const generatePDF = (siteDetails: any, doors: Door[]) => {
         0: { cellWidth: 145 }, 
         1: { cellWidth: 38, halign: 'center', fontStyle: 'bold' } 
       },
-      // This allows the table to break across pages if it's too long
       margin: { bottom: 35 }, 
       didParseCell: (data) => {
         if (data.section === 'body' && data.column.index === 1) {
@@ -121,9 +124,9 @@ export const generatePDF = (siteDetails: any, doors: Door[]) => {
       }
     });
 
-    let currentY = (doc as any).lastAutoTable.finalY;
+    // @ts-ignore
+    let currentY = doc.lastAutoTable.finalY;
 
-    // Check if there is enough space for the Notes section (requires ~40mm)
     if (currentY > 240) {
       doc.addPage();
       currentY = 30;
@@ -164,7 +167,6 @@ export const generatePDF = (siteDetails: any, doors: Door[]) => {
   if (OWNER_SIGNATURE) doc.addImage(OWNER_SIGNATURE, 'PNG', 14, 38, 50, 20);
   doc.setFontSize(13);
   doc.text(`Lead Inspector: ${siteDetails.engineerInitials}`, 14, 70);
-  // doc.text(`Verification Date: ${timestamp}`, 14, 78);
 
   addFooter(doc);
   doc.save(`Mae_Fire_Report_${siteDetails.certNumber || 'Export'}.pdf`);
