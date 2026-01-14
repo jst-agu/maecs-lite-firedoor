@@ -111,7 +111,7 @@ export default function DoorCard({ door }: DoorCardProps) {
             {hasFailures && <span className="animate-pulse bg-red-100 px-2 py-0.5 rounded text-[10px]">Attention Needed</span>}
           </label>
           <textarea
-            className={`w-full p-3 text-sm rounded-lg border focus:ring-2 outline-none transition-all ${
+            className={`w-full p-3 text-sm text-gray-600 rounded-lg border focus:ring-2 outline-none transition-all ${
               hasFailures ? 'border-red-300 focus:ring-red-100 min-h-[120px]' : 'border-gray-200 focus:ring-gray-100 min-h-[100px]'
             }`}
             placeholder="What repairs or adjustments are needed?"
@@ -123,7 +123,7 @@ export default function DoorCard({ door }: DoorCardProps) {
         <div className="space-y-2">
           <label className="text-xs font-black uppercase text-gray-500">Additional Notes</label>
           <textarea
-            className="w-full p-3 text-sm rounded-lg border border-gray-200 focus:ring-2 focus:ring-gray-100 outline-none min-h-[120px]"
+            className="w-full p-3 text-sm text-gray-600 rounded-lg border border-gray-200 focus:ring-2 focus:ring-gray-100 outline-none min-h-[120px]"
             placeholder="General observations or specific site conditions..."
             value={door.notes || ''}
             onChange={(e) => updateDoor(door.id, { notes: e.target.value })}
