@@ -1,6 +1,9 @@
+'use client';
+
 import SiteDetails from '@/components/forms/SiteDetails';
 import DoorCard from '@/components/forms/DoorCard';
 import { useAssessmentStore } from '@/store/useAssessmentStore';
+import { use } from 'react';
 
 export default function AssessmentPage() {
   const { doors } = useAssessmentStore();
