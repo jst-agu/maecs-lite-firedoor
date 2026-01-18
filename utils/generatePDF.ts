@@ -48,7 +48,7 @@ export const generatePDF = (siteDetails: SiteDetails, doors: Door[]) => {
   doc.text("+44 7404 229188", 195, 17, { align: 'right' });
   doc.text("admin@maecs.co.uk", 195, 22, { align: 'right' });
   doc.setTextColor(0, 50, 200);
-  doc.text("https://maecs.co.uk/", 195, 27, { align: 'right' });
+  doc.text("https://maecs.co.uk", 195, 27, { align: 'right' });
 
   doc.setDrawColor(190, 0, 0);
   doc.setLineWidth(1.5);
