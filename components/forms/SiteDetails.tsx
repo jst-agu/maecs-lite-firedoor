@@ -94,10 +94,10 @@ export default function SiteDetails() {
             name="engineerInitials"
             type="text"
             // maxLength={3}
-            className="p-2.5 border border-gray-200 text-gray-600 rounded-lg outline-none font-bold uppercase text-center w-24"
+            className="p-2.5 border border-gray-200 text-gray-600 rounded-lg outline-none text-center"
             value={siteDetails.engineerInitials}
             onChange={handleChange}
-            placeholder="JS"
+            placeholder="Uchechukwu Okafor..."
           />
         </div>
 
